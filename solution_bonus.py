@@ -10,7 +10,14 @@ def get_word() -> str:
     param: None
     return: str
     """
-    word_list : list[str] = ['cat', 'dog', 'rabbit', 'hamster', 'goldfish', 'parrot', 'canary', 'duck', 'pigeon', 'python', 'spider', 'ferret', 'lizard', 'turtle', 'chinchilla', 'squirrel', 'gerbil', 'hedgehog', 'tarantula', 'scorpion']
+    word_list : list[str] = ['cat', 'dog', 'rabbit', 
+                             'hamster', 'goldfish', 'parrot',
+                             'canary', 'duck', 'pigeon',
+                             'python', 'spider', 'ferret',
+                             'lizard', 'turtle', 'chinchilla',
+                             'squirrel', 'gerbil', 'hedgehog',
+                             'tarantula', 'scorpion']
+    
     return random.choice(word_list) 
 
 def display_hangman(lives : int) -> None:
@@ -40,10 +47,13 @@ def get_guess(guessed_letters : list[str]) -> str:
     """
     while True:  # Loop until a valid and not guessed before letter is entered
         letter : str = input('Choose a letter: ').lower()
+
         if not letter.isalpha() or len(letter) != 1:
             print("Please enter a single letter.")
+
         elif letter in guessed_letters:
             print("You've already guessed that letter!")
+
         else:
             return letter
 
@@ -70,13 +80,16 @@ def play_game() -> None:
             for i, char in enumerate(word_to_guess):
                 if char == letter:
                     word_guessed[i] = letter
+
         else: # Decrease the lives if the letter is not in the word
             lives -= 1
             print(f'Incorrect! You have {lives} lives left.')
 
     display_hangman(lives)
+    
     if lives == 0: # Check if the player lives are over
         print(f'You lost! The word was: {word_to_guess}')
+
     else:
         print(' '.join(word_guessed))
         print('You won! 🎉')
